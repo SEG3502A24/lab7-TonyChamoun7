@@ -1,18 +1,15 @@
 package seg3x02.booksrestapi.entities
 
-import jakarta.persistence.*
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
 
 @Entity
-class Author {
+data class Author(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long = 0
-    var firstName: String = ""
-    var lastName: String = ""
-
-    @ManyToMany
-    var books: MutableList<Book> = ArrayList()
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    var bio: Bio = Bio()
-}
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0,
+    val firstName: String,
+    val lastName: String
+)
