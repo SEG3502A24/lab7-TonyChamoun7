@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
-import {Router} from '@angular/router';
-import {noop} from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { noop } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   redirectUrl: string | null | undefined;
-
-  constructor(private router: Router) {}
+  private router: Router = inject(Router);
 
   login(user: string, password: string): boolean {
     // hard coded for now
     if (user === 'admin' && password === 'password') {
       sessionStorage.setItem('username', user);
-      if (this.redirectUrl) { this.router.navigate([this.redirectUrl]).then(noop); }
+      if (this.redirectUrl) {
+        this.router.navigate([this.redirectUrl]).then(noop);
+      }
       this.redirectUrl = null;
       return true;
     }

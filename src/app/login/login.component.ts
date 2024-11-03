@@ -1,23 +1,20 @@
-import { Component } from '@angular/core';
-import {AuthenticationService} from '../authentication.service';
-import {Router} from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { AuthenticationService } from '../authentication.service';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
-    standalone: true,
-    imports: [NgIf, FormsModule]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
+  standalone: true,
+  imports: [NgIf, FormsModule]
 })
 export class LoginComponent {
   username = '';
   password = '';
   message!: string;
-
-  constructor(private router: Router,
-              private loginService: AuthenticationService) { }
+  private loginService: AuthenticationService = inject(AuthenticationService);
 
   get isLoggedIn(): boolean {
     return this.loginService.isLoggedIn();
